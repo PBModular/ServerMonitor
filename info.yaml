@@ -1,6 +1,6 @@
 info:
-  name: ModuleTemplate
-  author: TemplateDeveloper
+  name: ServerMonitor
+  author: CakesTwix
   version: 0.0.1
-  description: Just a module template
-  src_url: https://github.com/PBModular/ModuleTemplate
+  description: Simple server monitoring. With ntfy.sh push notification features 
+  src_url: https://github.com/PBModular/ServerMonitor
