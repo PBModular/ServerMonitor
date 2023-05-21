@@ -1,6 +1,7 @@
 # Bot stuff
 from base.mod_ext import ModuleExtension
 from base.module import command
+from ..config import ConfigSettings
 
 # Pyrogram
 from pyrogram import Client
@@ -10,9 +11,40 @@ from pyrogram.types import Message
 import platform
 import cpuinfo
 import psutil
+import requests
+
+# Python Libs
+import time
+from threading import Thread
 
 
 class SensorsExtension(ModuleExtension):
+    def on_init(self):
+        thread = Thread(target=self.temp_monitor)
+        thread.daemon = True
+        thread.start()
+
+    def temp_monitor(self):
+        while True:
+            sensors_temperatures = psutil.sensors_temperatures()
+            # sensor_name - amdgpu
+            for sensor_name in sensors_temperatures:
+                # get temp by sensor name
+                sensor = sensors_temperatures[sensor_name]
+
+                if sensor[0].high == None:
+                    high = ConfigSettings.high_temp
+                else:
+                    high = sensor[0].high
+
+                if(sensor[0].current > high and ConfigSettings.ntfy_topic):
+                    requests.post(f"https://ntfy.sh/{ConfigSettings.ntfy_topic}",
+                        data=f"📛 [{sensor_name}] {sensor[0].current} / {high}".encode(encoding='utf-8'))
+
+                # print(f"[{sensor_name}] {sensor[0].current} / {high}")
+            
+            time.sleep(60)
+
     @command("temp")
     async def temp_cmd(self, bot: Client, message: Message):
         if hasattr(psutil, "sensors_temperatures"):
