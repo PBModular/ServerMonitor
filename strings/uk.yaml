@@ -1,1 +1,37 @@
-{}
+cpu:
+  cpu_info: Інформація про процесор!
+  name: Назва
+  undetermined: Невизначений
+  count: Кількість
+  flags: Флаги
+  no_flags: Ніяких флагів
+memory:
+  memory_info: Інформація про пам'ять
+  ram: ОЗП
+  swap: Своп
+  disk_info: Інформація про диск
+  diskMountpint: Точка монтування
+  diskFileSystem: Файлова система
+  diskUsage: Використання диска
+  diskOptions: Опції
+network:
+  network_info: Інформація про мережу
+  address: Адреса
+os:
+  linux_info: Інформація про Linux
+  kernel: Ядро
+  hostname: Ім'я хоста
+  boot_time: Час безперебійної роботи
+  glib_ver: Версія glibc
+  os_releases: Інформація з файлу /etc/os-releases
+  not_available: Немає в наявності
+  pretty_name: Приємне ім'я
+  version: Версія
+  documentation: Документація
+  support: Підтримка
+  bug_report: Звіт про помилку
+sensors:
+  sensors_info: Інформація про датчики
+  temperature: Температура
+  no_fans: Не підтримує / Немає вентиляторів
+  fans: Вентилятори
