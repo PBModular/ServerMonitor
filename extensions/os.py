@@ -9,6 +9,7 @@ from pyrogram.types import Message
 # Python libs
 from os.path import exists
 import datetime
+import subprocess
 
 # Libs
 import platform
@@ -44,14 +45,14 @@ class OSExtension(ModuleExtension):
 
     @command("distro")
     async def distro_cmd(self, bot: Client, message: Message):
-        string = f"""🐧  <b>Linux Info</b>
-        <b>Name:</b> {get_distro()}
-        <b>Kernel:</b> {platform.release()}
-        <b>Hostname:</b> {platform.node()}
-        <b>Boot time:</b> {datetime.datetime.fromtimestamp(psutil.boot_time()).strftime(
+        string = f"""🐧  <b>{self.S['os']['linux_info']}</b>
+        <b>{self.S['cpu']['name']}:</b> {get_distro()}
+        <b>{self.S['os']['kernel']}:</b> {platform.release()}
+        <b>{self.S['os']['hostname']}:</b> {platform.node()}
+        <b>{self.S['os']['boot_time']}:</b> {datetime.datetime.fromtimestamp(psutil.boot_time()).strftime(
             "%Y-%m-%d %H:%M:%S"
         )}
-        {f'<b>glibc ver:</b> {platform.glibc()[1]}' if hasattr(platform, 'glibc') else ''}
+        {f'<b>{self.S["os"]["glibc_ver"]}:</b> {platform.glibc()[1]}' if hasattr(platform, 'glibc') else ''}
         """
 
         await message.reply(
@@ -61,13 +62,13 @@ class OSExtension(ModuleExtension):
     
     @command("osrelease")
     async def osrelease_cmd(self, bot: Client, message: Message):
-        string = f"""📦  <b>/etc/os-releases Info:</b>
-        <b>Pretty Name:</b> {os_release["PRETTY_NAME"]}
-        <b>Name:</b> {os_release["NAME"]}
-        <b>Version:</b> {os_release.get("VERSION", "Not available")}
-        <b>Documentation:</b> {os_release.get("DOCUMENTATION_URL", "Not available")}
-        <b>Support:</b> {os_release.get("SUPPORT_URL", "Not available")}
-        <b>Bug Report:</b> {os_release["BUG_REPORT_URL"]}
+        string = f"""📦  <b>{self.S["os"]["os_releases"]}:</b>
+        <b>{self.S["os"]["pretty_name"]}:</b> {os_release["PRETTY_NAME"]}
+        <b>{self.S["cpu"]["name"]}:</b> {os_release["NAME"]}
+        <b>{self.S["os"]["version"]}:</b> {os_release.get("VERSION", self.S["os"]["not_available"])}
+        <b>{self.S["os"]["documentation"]}:</b> {os_release.get("DOCUMENTATION_URL", self.S["os"]["not_available"])}
+        <b>{self.S["os"]["support"]}:</b> {os_release.get("SUPPORT_URL", "Not available")}
+        <b>{self.S["os"]["bug_report"]}:</b> {os_release["BUG_REPORT_URL"]}
             """
 
         await message.reply(

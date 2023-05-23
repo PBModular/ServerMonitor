@@ -50,7 +50,9 @@ class SensorsExtension(ModuleExtension):
         if hasattr(psutil, "sensors_temperatures"):
             sensors_temperatures = psutil.sensors_temperatures()
 
+            string = f"🌡  <b>{self.S['sensors']['sensors_info']}</b>\n" + f"<b>{self.S['sensors']['temperature']}</b>:\n"
             string = "🌡  <b>Sensors Info</b>\n" + "<b>Temperature</b>:\n"
+            string = f"🌡  <b>{self.S['sensors']['sensors_info']}</b>\n" + f"<b>{self.S['sensors']['temperature']}</b>:\n"
             for sensor_name in sensors_temperatures:
                 sensor = sensors_temperatures[sensor_name]
                 string += f"<b>{sensor_name}</b>\n"
@@ -85,18 +87,20 @@ class SensorsExtension(ModuleExtension):
     async def fan_cmd(self, bot: Client, message: Message):
         if not hasattr(psutil, "sensors_fans"):
             return await message.reply(
-                "❌ <b>Not support / No fans</b>",
+                f"❌ <b>{self.S['sensors']['no_fans']}</b>",
                 quote=True
             )
         sensors_fans = psutil.sensors_fans()
 
         if sensors_fans == {}:
             return await message.reply(
-                "❌ <b>Not support / No fans</b>",
+                f"❌ <b>{self.S['sensors']['no_fans']}</b>",
                 quote=True
             )
 
+        string = f"<b>{self.S['sensors']['fans']}</b>:"
         string = "<b>Fans</b>:"
+        string = f"<b>{self.S['sensors']['fans']}</b>:"
         for sensor_name in sensors_fans:
             sensor = sensors_fans[sensor_name]
             string += f"<b>{sensor_name}</b>\n"

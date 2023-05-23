@@ -1,2 +1,41 @@
-some:
-  strings: "Hello, World!"
+cpu:
+  cpu_info: "CPU Info!"
+  name: "Name"
+  undetermined: "Undetermined"
+  count: "Count"
+  flags: "Flags"
+  no_flags: "No flags"
+
+memory:
+  memory_info: "Memory Info"
+  ram: "RAM"
+  swap: "Swap"
+  disk_info: "Disk Info"
+  diskMountpint: "Mount"
+  diskFileSystem: "Filesystem"
+  diskUsage: "Disk Usage"
+  diskOptions: "Options"
+
+network:
+  network_info: "Network Info"
+  address: "Address"
+
+os:
+  linux_info: "Linux Info"
+  kernel: "Kernel"
+  hostname: "Hostname"
+  boot_time: "Boot time"
+  glib_ver: "glibc version"
+  os_releases: "/etc/os-releases Info"
+  not_available: "Not Available"
+  pretty_name: "Pretty name"
+  version: "Version"
+  documentation: "Documentation"
+  support: "Support"
+  bug_report: "Bug Report"
+
+sensors:
+  sensors_info: "Sensors Info"
+  temperature: "Temperature"
+  no_fans: "Not support / No fans"
+  fans: "Fans"

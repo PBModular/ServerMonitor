@@ -24,8 +24,8 @@ class NetworkExtension(ModuleExtension):
     async def netaddr_cmd(self, bot: Client, message: Message):
         net_if_addrs = psutil.net_if_addrs()
         
-        string = "🌐  <b>Network Info</b>\n"
-        string += "<b>Address</b>:\n"
+        string = f"🌐  <b>{self.S['network']['network_info']}</b>\n"
+        string += f"<b>{self.S['network']['address']}</b>:\n"
         for interf in net_if_addrs:
             interface = net_if_addrs[interf]
             string += f"<b>{interf}</b>\n"

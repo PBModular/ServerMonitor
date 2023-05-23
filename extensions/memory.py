@@ -35,9 +35,9 @@ def bytes2human(n):
 class MemoryExtension(ModuleExtension):
     @command("ram")
     async def ram_cmd(self, bot: Client, message: Message):
-        string = "🗄  <b>Memory Info</b>\n"
-        string += f"<b>RAM</b>:  |{progressbar(psutil.virtual_memory().percent, 10)} <code>({bytes2human(psutil.virtual_memory().used)}/{bytes2human(psutil.virtual_memory().total)})</code>|\n"
-        string += f"<b>Swap</b>: |{progressbar(psutil.swap_memory().percent, 10)} <code>({bytes2human(psutil.swap_memory().used)}/{bytes2human(psutil.swap_memory().total)})</code>|\n"
+        string = f"🗄  <b>{self.S['memory']['memory_info']}</b>\n"
+        string += f"<b>{self.S['memory']['ram']}</b>:  |{progressbar(psutil.virtual_memory().percent, 10)} <code>({bytes2human(psutil.virtual_memory().used)}/{bytes2human(psutil.virtual_memory().total)})</code>|\n"
+        string += f"<b>{self.S['memory']['swap']}</b>: |{progressbar(psutil.swap_memory().percent, 10)} <code>({bytes2human(psutil.swap_memory().used)}/{bytes2human(psutil.swap_memory().total)})</code>|\n"
 
         await message.reply(
                 string,
@@ -46,16 +46,16 @@ class MemoryExtension(ModuleExtension):
 
     @command("rom")
     async def rom_cmd(self, bot: Client, message: Message):
-        string = "💽  <b>Disk Info</b>\n"
+        string = f"💽  <b>{self.S['memory']['disk_info']}</b>\n"
         for disk in psutil.disk_partitions():
             disk_usage = psutil.disk_usage(disk.mountpoint)
 
             string += f"<b>{disk.device}</b>\n"
-            string += f"├── <b>Mount</b> {disk.mountpoint}\n"
-            string += f"├── <b>FS</b> {disk.fstype}\n"
-            string += f"├── <b>Disk Usage</b> {disk_usage.percent}% ({bytes2human(disk_usage.used)}/{bytes2human(disk_usage.total)})\n"
+            string += f"├── <b>{self.S['memory']['diskMountpint']}</b> {disk.mountpoint}\n"
+            string += f"├── <b>{self.S['memory']['diskFileSystem']}</b> {disk.fstype}\n"
+            string += f"├── <b>{self.S['memory']['diskUsage']}</b> {disk_usage.percent}% ({bytes2human(disk_usage.used)}/{bytes2human(disk_usage.total)})\n"
             string += f"│       └──{progressbar(disk_usage.percent, 10)}\n"
-            string += f"└── <b>Options</b> {disk.opts}\n\n"
+            string += f"└── <b>{self.S['memory']['diskOptions']}</b> {disk.opts}\n\n"
 
         await message.reply(
                 string,
